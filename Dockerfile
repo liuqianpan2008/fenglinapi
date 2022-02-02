@@ -6,7 +6,8 @@ FROM maven:3.5-jdk-8-alpine as builder
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-
+#安装字体
+COPY 微软雅黑.ttf /usr/share/fonts/chinese/msyh.ttc
 # Build a release artifact.
 RUN mvn package -DskipTests
 
