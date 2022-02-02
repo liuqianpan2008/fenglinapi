@@ -40,6 +40,7 @@ public class pingmcimage {
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
         //写字
         Font font = getSIMSUN(Font.PLAIN, 16);
+//        Font font = new Font("msyh.ttf", Font.PLAIN, 16);
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
         graphics.setColor(Color.BLACK);
@@ -85,13 +86,14 @@ public class pingmcimage {
 
         try {
             InputStream FontS = new ClassPathResource("fonts/微软雅黑.ttf").getInputStream();
-            assert FontS != null;
-            font = Font.createFont(Font.PLAIN, FontS).deriveFont(style, size);
-        } catch (FontFormatException e) {
-
+            try {
+                font = Font.createFont(Font.PLAIN, FontS).deriveFont(style, size);
+            } catch (FontFormatException e) {
+                font = new Font("msyh.ttf", Font.PLAIN, 16);
+                System.out.println("字体加载错误！"+e);
+            }
         } catch (IOException e) {
             System.out.println("字体加载错误！"+e);
-//            font = new Font("微软雅黑", Font.PLAIN, 16);
         }
         return font;
     }
