@@ -4,10 +4,7 @@ import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.SneakyThrows;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +14,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
 
 public class pingmcimage {
     @SneakyThrows
@@ -92,13 +84,14 @@ public class pingmcimage {
         //获取字体流
 
         try {
-            InputStream FontS = new ClassPathResource("/fonts/微软雅黑.ttf").getInputStream();
+            InputStream FontS = new ClassPathResource("fonts/微软雅黑.ttf").getInputStream();
             assert FontS != null;
             font = Font.createFont(Font.PLAIN, FontS).deriveFont(style, size);
         } catch (FontFormatException e) {
 
         } catch (IOException e) {
-            font = new Font("微软雅黑", Font.PLAIN, 16);
+            System.out.println("字体加载错误！"+e);
+//            font = new Font("微软雅黑", Font.PLAIN, 16);
         }
         return font;
     }
