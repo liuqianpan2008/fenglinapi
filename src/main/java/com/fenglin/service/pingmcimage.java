@@ -5,6 +5,7 @@ import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.SneakyThrows;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -17,6 +18,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -45,7 +47,7 @@ public class pingmcimage {
         //获取操作系统对象
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
         //写字
-        Font font = new Font("微软雅黑", Font.PLAIN, 16);
+        Font font = getSIMSUN(Font.PLAIN, 16);
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
         graphics.setColor(Color.BLACK);
@@ -85,4 +87,18 @@ public class pingmcimage {
         g2.dispose();
         return bi2;
     }
+    public static Font getSIMSUN(int style, float size) {
+        Font font = null;
+        //获取字体流
+        InputStream simsunFontFile = pingmcimage.class.getResourceAsStream("/fonts/微软雅黑.ttf");
+        try {
+            font = Font.createFont(Font.PLAIN, simsunFontFile).deriveFont(style, size);
+        } catch (FontFormatException e) {
+
+        } catch (IOException e) {
+            font = new Font("微软雅黑", Font.PLAIN, 16);
+        }
+        return font;
+    }
+
 }
