@@ -90,9 +90,11 @@ public class pingmcimage {
     public static Font getSIMSUN(int style, float size) {
         Font font = null;
         //获取字体流
-        InputStream simsunFontFile = pingmcimage.class.getResourceAsStream("/fonts/微软雅黑.ttf");
+
         try {
-            font = Font.createFont(Font.PLAIN, simsunFontFile).deriveFont(style, size);
+            InputStream FontS = new ClassPathResource("/fonts/微软雅黑.ttf").getInputStream();
+            assert FontS != null;
+            font = Font.createFont(Font.PLAIN, FontS).deriveFont(style, size);
         } catch (FontFormatException e) {
 
         } catch (IOException e) {
